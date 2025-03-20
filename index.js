@@ -1,9 +1,13 @@
+require('dotenv').config(); // Cargar las variables de entorno
+
 const express = require("express");
 const sequelize = require("./database");
 const { Actor, Director, Movie } = require("./relationships")(sequelize);
-const port = 5555;
+const port = process.env.PORT || 5555; // puerto del .env o 5555 por defecto
 
 const app = express();
+
+app.use(express.json());
 
 app.get('/actors', async (req, res) => {
     try {
