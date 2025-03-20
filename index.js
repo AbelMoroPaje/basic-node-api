@@ -5,6 +5,16 @@ const port = 5555;
 
 const app = express();
 
+app.get('/actores', async (req, res) => {
+    try {
+        const actores = await Actor.findAll();
+        return res.status(200).json(actores);
+    } catch (error) {
+        console.error("Error getting actors:", error);
+        return res.status(500).json({ error: "Internal server error" });
+    }
+});
+
 app.get('/', (req, res) => {
     return res.status(200).json("BASIC NODE API")
 });
