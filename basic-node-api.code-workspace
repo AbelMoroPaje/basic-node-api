@@ -15,8 +15,8 @@
 				"server": "localhost",
 				"port": 3306,
 				"driver": "MySQL",
-				"name": "movieDB",
-				"database": "peliculasdb",
+				"name": "moviesDB",
+				"database": "moviesdb",
 				"username": "root",
 				"password": "toor"
 			}

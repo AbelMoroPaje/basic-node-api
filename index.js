@@ -1,14 +1,14 @@
 const express = require("express");
 const sequelize = require("./database");
-const { Actor, Director, Pelicula } = require("./relationships")(sequelize);
+const { Actor, Director, Movie } = require("./relationships")(sequelize);
 const port = 5555;
 
 const app = express();
 
-app.get('/actores', async (req, res) => {
+app.get('/actors', async (req, res) => {
     try {
-        const actores = await Actor.findAll();
-        return res.status(200).json(actores);
+        const actors = await Actor.findAll();
+        return res.status(200).json(actors);
     } catch (error) {
         console.error("Error getting actors:", error);
         return res.status(500).json({ error: "Internal server error" });
@@ -19,30 +19,30 @@ app.get('/', (req, res) => {
     return res.status(200).json("BASIC NODE API")
 });
 
-app.get('/actores/gonzalo',(req,res) => {
+app.get('/actors/gonzalo',(req,res) => {
     const Gonzalo = Actor.build({
-        Nombre: "Gonzalo",
-        Apellido: "Cano",
-        Nacionalidad: "Español",
-      });  
+        FirstName: "Gonzalo",
+        LastName: "Cano",
+        Nationality: "Spanish",
+    });
 
-      return res.status(200).json(Gonzalo.toJSON());
+    return res.status(200).json(Gonzalo.toJSON());
 });
 
-app.get('/actores/gonzalobd', async (req, res) => {
-    const transaction = await sequelize.transaction(); 
+app.get('/actors/gonzalodb', async (req, res) => {
+    const transaction = await sequelize.transaction();
 
     try {
-        const Gonzalo = await Actor.create({ 
-            Nombre: "Gonzalo",
-            Apellido: "Cano",
-            Nacionalidad: "Español",
-        }, { transaction }); 
+        const Gonzalo = await Actor.create({
+            FirstName: "Gonzalo",
+            LastName: "Cano",
+            Nationality: "Spanish",
+        }, { transaction });
 
-        await transaction.commit(); 
-        return res.status(201).json(Gonzalo.toJSON()); 
+        await transaction.commit();
+        return res.status(201).json(Gonzalo.toJSON());
     } catch (error) {
-        await transaction.rollback(); 
+        await transaction.rollback();
         console.error("Error creating actor:", error);
         return res.status(500).json({ error: "Internal server error" });
     }

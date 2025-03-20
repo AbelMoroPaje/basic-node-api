@@ -1,29 +1,29 @@
 const { DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
-    const Pelicula = sequelize.define('Pelicula', {
-        PeliculaID: {
+    const Movie = sequelize.define('Movie', {
+        MovieID: {
             type: DataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true,
             allowNull: false,
         },
-        Titulo: {
+        Title: {
             type: DataTypes.STRING,
             allowNull: false,
         },
-        AnioEstreno: {
+        ReleaseYear: {
             type: DataTypes.INTEGER,
         },
-        Genero: {
+        Genre: {
             type: DataTypes.STRING,
         },
         DirectorID: {
             type: DataTypes.INTEGER,
         },
     }, {
-        tableName: "Peliculas",
+        tableName: "Movies",
         timestamps: false,
     });
-    return Pelicula;
+    return Movie;
 };

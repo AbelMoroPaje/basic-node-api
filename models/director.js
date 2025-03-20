@@ -8,17 +8,17 @@ module.exports = (sequelize) => {
             autoIncrement: true,
             allowNull: false,
         },
-        Nombre: {
+        FirstName: {
             type: DataTypes.STRING,
         },
-        Apellido: {
+        LastName: {
             type: DataTypes.STRING,
         },
-        Nacionalidad: {
+        Nationality: {
             type: DataTypes.STRING,
         },
     }, {
-        tableName: "Directores",
+        tableName: "Directors",
         timestamps: false,
     });
     return Director;

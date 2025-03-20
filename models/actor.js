@@ -1,5 +1,4 @@
 const { DataTypes } = require('sequelize');
-const sequelize = require('../database');
 
 module.exports = (sequelize) => {
     const Actor = sequelize.define('Actor', {
@@ -9,18 +8,18 @@ module.exports = (sequelize) => {
             autoIncrement: true,
             allowNull: false,
         },
-        Nombre: {
+        FirstName: {
             type: DataTypes.STRING,
             allowNull: false,
         },
-        Apellido: {
+        LastName: {
             type: DataTypes.STRING,
         },
-        Nacionalidad: {
+        Nationality: {
             type: DataTypes.STRING,
         },
     }, {
-        tableName: "Actores",
+        tableName: "Actors",
         timestamps: false,
     });
     return Actor;
