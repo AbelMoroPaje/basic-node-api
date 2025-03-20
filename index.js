@@ -1,6 +1,6 @@
 const express = require("express");
 const sequelize = require("./database");
-const Actor = require("./model/actor")(sequelize)
+const { Actor, Director, Pelicula } = require("./relationships")(sequelize);
 const port = 5555;
 
 const app = express();
