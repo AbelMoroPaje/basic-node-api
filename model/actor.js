@@ -20,7 +20,8 @@ module.exports = (sequelize) => {
             type: DataTypes.STRING,
         },
     }, {
-        tableName: "Actores"
+        tableName: "Actores",
+        timestamps: false,
     });
     return Actor;
 };

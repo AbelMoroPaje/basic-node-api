@@ -18,7 +18,8 @@ module.exports = (sequelize) => {
             type: DataTypes.STRING,
         },
     }, {
-        tableName: "Directores"
+        tableName: "Directores",
+        timestamps: false,
     });
     return Director;
 };
