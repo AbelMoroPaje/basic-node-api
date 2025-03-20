@@ -17,6 +17,8 @@ module.exports = (sequelize) => {
         Nacionalidad: {
             type: DataTypes.STRING,
         },
+    }, {
+        tableName: "Directores"
     });
     return Director;
 };

@@ -19,6 +19,8 @@ module.exports = (sequelize) => {
         Nacionalidad: {
             type: DataTypes.STRING,
         },
+    }, {
+        tableName: "Actores"
     });
     return Actor;
 };
