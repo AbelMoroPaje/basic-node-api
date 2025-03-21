@@ -4,10 +4,22 @@ const express = require("express");
 const sequelize = require("./database");
 const { Actor, Director, Movie } = require("./relationships")(sequelize);
 const port = process.env.PORT || 5555; // puerto del .env o 5555 por defecto
+const logger = process.env.LOGGER || console;
 
 const app = express();
 
 app.use(express.json());
+
+
+function throwGetError(str, error, res, customMessage) {
+    logger.error(`Error getting ${str}:`, error);
+    const message = customMessage || "Internal server error";
+    return res.status(500).json({ error: message });
+}
+
+app.get('/', (req, res) => {
+    return res.status(200).json("BASIC NODE API")
+});
 
 app.get('/actors', async (req, res) => {
     try {
@@ -15,15 +27,29 @@ app.get('/actors', async (req, res) => {
         return res.status(200).json(actors);
     } catch (error) {
         console.error("Error getting actors:", error);
-        return res.status(500).json({ error: "Internal server error" });
+        throwGetError("actors", error, res, "Failed to retrieve actors.");
     }
 });
 
-app.get('/', (req, res) => {
-    return res.status(200).json("BASIC NODE API")
+app.get('/directors', async (req, res) => {
+    try {
+        const directors = await Director.findAll();
+        return res.status(200).json(directors);
+    } catch (error) {
+        throwGetError("directors", error, res, "Failed to retrieve directors.");
+    }
 });
 
-app.get('/actors/gonzalo',(req,res) => {
+app.get('/movies', async (req, res) => {
+    try {
+        const movies = await Movie.findAll();
+        return res.status(200).json(movies);
+    } catch (error) {
+        throwGetError("movies", error, res, "Failed to retrieve movies.");
+    }
+});
+
+app.get('/actors/gonzalo', (req, res) => {
     const Gonzalo = Actor.build({
         FirstName: "Gonzalo",
         LastName: "Cano",
