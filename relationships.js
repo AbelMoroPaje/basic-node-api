@@ -1,14 +1,19 @@
+const Director = require('./models/director/model');
+const Actor = require('./models/actor/model');
+const Movie = require('./models/movie/model');
+const MoviesActors = require('./models/moviesActors/model');
+
 module.exports = (sequelize) => {
-    const Director = require('./models/director')(sequelize);
-    const Actor = require('./models/actor')(sequelize);
-    const Movie = require('./models/movie')(sequelize);
-    const MoviesActors = require('./models/moviesActors')(sequelize);
+    const DirectorModel = Director(sequelize);
+    const ActorModel = Actor(sequelize);
+    const MovieModel = Movie(sequelize);
+    const MoviesActorsModel = MoviesActors(sequelize);
 
-    Movie.belongsTo(Director, { foreignKey: 'DirectorID' });
-    Director.hasMany(Movie, { foreignKey: 'DirectorID' });
+    MovieModel.belongsTo(DirectorModel, { foreignKey: 'DirectorID' });
+    DirectorModel.hasMany(MovieModel, { foreignKey: 'DirectorID' });
 
-    Movie.belongsToMany(Actor, { through: MoviesActors, foreignKey: 'MovieID', otherKey: 'ActorID' });
-    Actor.belongsToMany(Movie, { through: MoviesActors, foreignKey: 'ActorID', otherKey: 'MovieID' });
+    MovieModel.belongsToMany(ActorModel, { through: MoviesActorsModel, foreignKey: 'MovieID', otherKey: 'ActorID' });
+    ActorModel.belongsToMany(MovieModel, { through: MoviesActorsModel, foreignKey: 'ActorID', otherKey: 'MovieID' });
 
-    return { Director, Actor, Movie, MoviesActors };
+    return { Director: DirectorModel, Actor: ActorModel, Movie: MovieModel, MoviesActors: MoviesActorsModel };
 };
