@@ -134,3 +134,36 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+# VS Code
+.vscode/
+
+# Sequelize specific
+migrations/
+seeders/
+config/config.json # o config.js si tienes la configuracion local de sequelize.
+
+# MySQL specific (si tienes archivos de volcado de la base de datos)
+*.sql
+*.dump
+
+# Express specific (si tienes archivos de sesión o caché)
+sessions/
+cache/
+
+# Environment files (si usas variables de entorno locales)
+.env.local
+.env.*.local
+
+# Jest specific (si usas Jest para pruebas)
+coverage/
+jest-cache/
+
+# ESLint/Prettier cache
+.eslintcache
+.prettiercache
+
+# Otros archivos de caché y temporales
+*.swp # Archivos de intercambio de Vim
+*.bak # Archivos de respaldo
+*.tmp # Archivos temporales
