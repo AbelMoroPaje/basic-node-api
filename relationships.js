@@ -1,13 +1,8 @@
-const Director = require('./models/director/model');
-const Actor = require('./models/actor/model');
-const Movie = require('./models/movie/model');
-const MoviesActors = require('./models/moviesActors/model');
-
 module.exports = (sequelize) => {
-    const DirectorModel = Director(sequelize);
-    const ActorModel = Actor(sequelize);
-    const MovieModel = Movie(sequelize);
-    const MoviesActorsModel = MoviesActors(sequelize);
+    const DirectorModel = require('./entidades/directors/model')(sequelize);
+    const ActorModel = require('./entidades/actors/model')(sequelize);
+    const MovieModel = require('./entidades/movies/model')(sequelize);
+    const MoviesActorsModel = require('./entidades/moviesActors/model')(sequelize);
 
     MovieModel.belongsTo(DirectorModel, { foreignKey: 'DirectorID' });
     DirectorModel.hasMany(MovieModel, { foreignKey: 'DirectorID' });
