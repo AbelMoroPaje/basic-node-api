@@ -303,42 +303,4 @@
         }
     ]
     ```
-
-### Obtener una película con detalles de director y actores:
-
-* **Método:** `GET`
-* **URL:** `/movies/:movieId`
-* **Parámetros de ruta:**
-    * `movieId`: ID de la película.
-* **Ejemplo de solicitud:**
-    * `GET /movies/1`
-* **Ejemplo de respuesta JSON (200 OK):**
-
-    ```json
-    {
-        "MovieID": 1,
-        "Title": "Inception",
-        "ReleaseYear": 2010,
-        "Genre": "Science Fiction",
-        "Director": {
-            "DirectorID": 1,
-            "FirstName": "Christopher",
-            "LastName": "Nolan",
-            "Nationality": "American"
-        },
-        "Actors": [
-            {
-                "ActorID": 1,
-                "FirstName": "Leonardo",
-                "LastName": "DiCaprio",
-                "Nationality": "American"
-            },
-            {
-                "ActorID": 3,
-                "FirstName": "Joseph",
-                "LastName": "Gordon-Levitt",
-                "Nationality": "American"
-            }
-        ]
-    }
-    ```
+    
