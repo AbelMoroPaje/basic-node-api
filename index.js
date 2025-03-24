@@ -24,9 +24,7 @@ app.get('/', (req, res) => {
 
 app.get('/actors', actorController.findAll);
 app.get('/directors', directorController.findAll);
-//app.get('/movies', movieController.findAll);
-
-
+app.get('/movies', movieController.findAll);
 
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);
