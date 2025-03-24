@@ -2,9 +2,7 @@ require('dotenv').config();
 
 const express = require("express");
 const sequelize = require("./database");
-const { Director, Movie } = require("./relationships")(sequelize);
 const port = process.env.PORT || 5555;
-const logger = process.env.LOGGER || console;
 
 const app = express();
 app.use(express.json());
@@ -25,7 +23,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/actors', actorController.findAll);
-//app.get('/directors', directorController.findAll);
+app.get('/directors', directorController.findAll);
 //app.get('/movies', movieController.findAll);
 
 
