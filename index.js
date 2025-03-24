@@ -24,8 +24,12 @@ app.get('/', (req, res) => {
 
 app.get('/actors', actorController.findAll);
 app.post('/actors', actorController.create);
+
 app.get('/directors', directorController.findAll);
+app.post('/directors',directorController.create);
+
 app.get('/movies', movieController.findAll);
+app.post('/movies', movieController.create);
 
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);

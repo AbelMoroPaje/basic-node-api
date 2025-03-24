@@ -11,3 +11,12 @@ exports.findAll = async(req, res) => {
         throwGetError(error, res, "Failed to retrieve Movies.", 500);
     }
 };
+
+exports.create = async (req, res) => {
+    try {
+        const newMovie = await Movie.create(req.body);
+        return res.status(201).json(newMovie);
+    } catch (error) {
+        throwGetError(error, res, "Failed to create Movie.", 500);
+    }
+}
