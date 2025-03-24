@@ -23,13 +23,19 @@ app.get('/', (req, res) => {
 });
 
 app.get('/actors', actorController.findAll);
+app.get('/actors/:id', actorController.findById);
 app.post('/actors', actorController.create);
 
 app.get('/directors', directorController.findAll);
-app.post('/directors',directorController.create);
+app.get('/directors/:id', directorController.findById);
+app.post('/directors', directorController.create);
 
 app.get('/movies', movieController.findAll);
+app.get('/movies/:id', movieController.findById);
 app.post('/movies', movieController.create);
+
+app.get('/movies/:movieId/actors', movieActorsController.getActorsByMovie);
+app.post('/movies/:movieId/actors', movieActorsController.addActorsToMovie);
 
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);

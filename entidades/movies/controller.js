@@ -1,14 +1,53 @@
 const { relationships } = require('../../index');
 const Movie = relationships.Movie;
-const {throwGetError} = require('../../errorHandling');
+const { throwGetError } = require('../../errorHandling');
+const { Op } = require('sequelize');
 
-exports.findAll = async(req, res) => {
+exports.findAll = async (req, res) => {
     try {
-        console.log(Movie);
-        const Movies = await Movie.findAll();
-        return res.status(200).json(Movies);
+        const { title, releaseYear, genre, directorId } = req.query;
+
+        let whereClause = {};
+
+        if (title) {
+            whereClause.Title = { [Op.like]: `%${title}%` };
+        }
+
+        if (releaseYear) {
+            whereClause.ReleaseYear = releaseYear;
+        }
+
+        if (genre) {
+            whereClause.Genre = genre;
+        }
+
+        if (directorId) {
+            whereClause.DirectorID = directorId;
+        }
+
+        const movies = await Movie.findAll({
+            where: whereClause,
+        });
+
+        return res.status(200).json(movies);
     } catch (error) {
-        throwGetError(error, res, "Failed to retrieve Movies.", 500);
+        throwGetError(error, res, "Failed to retrieve movies.", 500);
+    }
+};
+
+exports.findById = async (req, res) => {
+    try {
+        const movieId = req.params.id;
+
+        const movie = await Movie.findByPk(movieId);
+
+        if (movie) {
+            return res.status(200).json(movie);
+        } else {
+            return res.status(404).json({ error: "Movie not found." });
+        }
+    } catch (error) {
+        throwGetError(error, res, "Failed to retrieve movie.", 500);
     }
 };
 
@@ -17,6 +56,6 @@ exports.create = async (req, res) => {
         const newMovie = await Movie.create(req.body);
         return res.status(201).json(newMovie);
     } catch (error) {
-        throwGetError(error, res, "Failed to create Movie.", 500);
+        throwGetError(error, res, "Failed to create movie.", 500);
     }
-}
+};
