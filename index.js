@@ -23,6 +23,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/actors', actorController.findAll);
+app.post('/actors', actorController.create);
 app.get('/directors', directorController.findAll);
 app.get('/movies', movieController.findAll);
 
