@@ -23,6 +23,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/actors', actorController.findAll);
+app.get('/actors/deleted', actorController.findDeleted);
 app.get('/actors/:id', actorController.findById);
 app.post('/actors', actorController.create);
 app.put('/actors/:id', actorController.update);
