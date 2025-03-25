@@ -3,18 +3,6 @@ const Actor = relationships.Actor;
 const { throwGetError } = require('../../errorHandling');
 const { Op } = require('sequelize');
 
-/*
-exports.findAll = async (req, res) => {
-    try {
-        console.log(Actor);
-        const actors = await Actor.findAll();
-        return res.status(200).json(actors);
-    } catch (error) {
-        throwGetError(error, res, "Failed to retrieve actors.", 500);
-    }
-};
-*/
-
 exports.findAll = async (req, res) => {
     try {
         const { nationality, firstName, lastName } = req.query;
