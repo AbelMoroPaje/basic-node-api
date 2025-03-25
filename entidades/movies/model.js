@@ -21,6 +21,11 @@ module.exports = (sequelize) => {
         DirectorID: {
             type: DataTypes.INTEGER,
         },
+        deletedAt: {
+            type: DataTypes.DATE,
+            allowNull: true,
+            defaultValue: null,
+        },
     }, {
         tableName: "Movies",
         timestamps: false,

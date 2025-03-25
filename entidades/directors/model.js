@@ -17,6 +17,11 @@ module.exports = (sequelize) => {
         Nationality: {
             type: DataTypes.STRING,
         },
+        deletedAt: {
+            type: DataTypes.DATE,
+            allowNull: true,
+            defaultValue: null,
+        },
     }, {
         tableName: "Directors",
         timestamps: false,
