@@ -25,14 +25,20 @@ app.get('/', (req, res) => {
 app.get('/actors', actorController.findAll);
 app.get('/actors/:id', actorController.findById);
 app.post('/actors', actorController.create);
+app.put('/actors/:id', actorController.update);
+app.delete('/actors/:id', actorController.delete);
 
 app.get('/directors', directorController.findAll);
 app.get('/directors/:id', directorController.findById);
 app.post('/directors', directorController.create);
+app.put('/directors/:id', directorController.update);
+app.delete('/directors/:id', directorController.delete);
 
 app.get('/movies', movieController.findAll);
 app.get('/movies/:id', movieController.findById);
 app.post('/movies', movieController.create);
+app.put('/movies/:id', movieController.update);
+app.delete('/movies/:id', movieController.delete);
 
 app.get('/movies/:movieId/actors', movieActorsController.getActorsByMovie);
 app.post('/movies/:movieId/actors', movieActorsController.addActorsToMovie);

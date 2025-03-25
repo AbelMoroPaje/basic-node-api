@@ -59,3 +59,39 @@ exports.create = async (req, res) => {
         throwGetError(error, res, "Failed to create movie.", 500);
     }
 };
+
+exports.update = async (req, res) => {
+    try {
+        const movieId = req.params.id;
+        const updatedMovieData = req.body;
+
+        const movie = await Movie.findByPk(movieId);
+
+        if (!movie) {
+            res.status(404).json({ error: "Movie not found." });
+        }
+
+        await movie.update(updatedMovieData);
+
+        return res.status(200).json({ message: "Movie updated successfully." });
+    } catch (error) {
+        throwGetError(error, res, "Failed to update movie.");
+    }
+};
+
+exports.delete = async (req, res) => {
+    try {
+        const movieId = req.params.id;
+        const movie = await Movie.findByPk(movieId);
+
+        if (!movie) {
+            res.status(404).json({ error: "Movie not found." });
+        }
+
+        await movie.destroy();
+
+        return res.status(200).json({ message: "Movie deleted successfully." });
+    } catch (error) {
+        throwGetError(error, res, "Failed to delete movie.", 500);
+    }
+};

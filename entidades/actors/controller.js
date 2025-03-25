@@ -55,3 +55,39 @@ exports.create = async (req, res) => {
         throwGetError(error, res, "Failed to create actor.", 500);
     }
 };
+
+exports.update = async (req, res) => {
+    try {
+        const actorId = req.params.id;
+        const updatedActorData = req.body;
+
+        const actor = await Actor.findByPk(actorId);
+
+        if (!actor) {
+            return res.status(404).json({ error: "Actor not found." });
+        }
+
+        await actor.update(updatedActorData);
+
+        return res.status(200).json({ message: "Actor updated successfully." });
+    } catch (error) {
+        throwGetError(error, res, "Failed to update actor.", 500);
+    }
+};
+
+exports.delete = async (req, res) => {
+    try {
+        const actorId = req.params.id;
+        const actor = await Actor.findByPk(actorId);
+
+        if (!actor) {
+            return res.status(404).json({ error: "Actor not found." });
+        }
+
+        await actor.destroy();
+
+        return res.status(200).json({ message: "Actor deleted successfully." });
+    } catch (error) {
+        throwGetError(error, res, "Failed to delete actor.", 500);
+    }
+};
